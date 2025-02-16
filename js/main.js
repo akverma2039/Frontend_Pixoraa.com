@@ -97,7 +97,7 @@ document.getElementById("contactForm").addEventListener("submit", async function
     const responseMessage = document.getElementById("responseMessage");
 
     try {
-        const response = await fetch("https://your-backend-url.com/contact", { 
+        const response = await fetch("https://pixoraa.onrender.com/contact", { 
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ name, email, phone, message }),
