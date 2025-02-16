@@ -122,7 +122,7 @@ $(document).ready(function () {
         // Send data to backend
         $.ajax({
             type: "POST",
-            url: "http://localhost:5000/send-email", // Change this if deployed
+            url: "https://pixoraa.onrender.com/send-email", // Change this if deployed
             contentType: "application/json",
             data: JSON.stringify(formData),
             success: function (response) {
