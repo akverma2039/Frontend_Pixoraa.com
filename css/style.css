@@ -188,7 +188,7 @@ html {
     margin: 0 auto 35px auto;
 }
 
-.carousel-control-prev {
+/* .carousel-control-prev {
     width: 90px;
     height: 60px;
     position: absolute;
@@ -218,7 +218,7 @@ html {
 .carousel-control-next:hover {
     background: var(--bs-secondary);
     transition: .8s;
-}
+} */
 
 .carousel-caption .carousel-content a button.carousel-content-btn1 {
     background: var(--bs-secondary);
