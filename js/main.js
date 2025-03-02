@@ -86,31 +86,44 @@
 
 
 // Contact Form Submission (Outside jQuery Function)
+
 document.getElementById("contactForm").addEventListener("submit", async function (event) {
-    event.preventDefault(); // Prevent default form submission
+    event.preventDefault(); // Prevent form from refreshing
 
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const phone = document.getElementById("phone").value;
-    const message = document.getElementById("message").value;
-
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const message = document.getElementById("message").value.trim();
     const responseMessage = document.getElementById("responseMessage");
 
+    if (!name || !email || !phone || !message) {
+        responseMessage.innerHTML = "❌ All fields are required!";
+        responseMessage.style.color = "red";
+        return;
+    }
+
     try {
-        const response = await fetch("https://pixoraa.onrender.com/contact", { 
+        const response = await fetch("https://pixoraa.onrender.com/contact", {
             method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, email, phone, message }),
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ name, email, phone, message })
         });
 
         const data = await response.json();
-        responseMessage.innerHTML = data.message;
-        responseMessage.style.color = "green";
 
-        // Reset form
-        document.getElementById("contactForm").reset();
+        if (response.ok) {
+            responseMessage.innerHTML = "✅ Message sent successfully!";
+            responseMessage.style.color = "green";
+            document.getElementById("contactForm").reset(); // Clear the form
+        } else {
+            responseMessage.innerHTML = `❌ Error: ${data.message}`;
+            responseMessage.style.color = "red";
+        }
     } catch (error) {
-        responseMessage.innerHTML = "Something went wrong. Please try again.";
+        console.error("Error sending message:", error);
+        responseMessage.innerHTML = "❌ Failed to send message. Please try again later.";
         responseMessage.style.color = "red";
     }
 });
